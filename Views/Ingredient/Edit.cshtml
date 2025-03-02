@@ -1,0 +1,47 @@
+﻿@model OnlineRestaurant.Models.Ingredient
+
+@{
+    ViewData["Title"] = "Edit Ingredient";
+    Layout = "_AdminDashboard";
+}
+
+<h1 class="text-center text-black">Edit Ingredient</h1>
+
+<div class="card shadow-lg p-4 mt-4">
+    <form asp-action="SaveEdit" asp-route-id="@Model.Id">
+        <div asp-validation-summary="All" class="text-danger text-center mb-3"></div>
+
+        <!-- Ingredient Name -->
+        <div class="row mb-3">
+            <div class="col">
+                <label class="form-label fw-bold">Ingredient Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter ingredient name" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Description -->
+        <div class="row mb-3">
+            <div class="col">
+                <label class="form-label fw-bold">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter ingredient description" required></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-warning w-50">Save Changes</button>
+        </div>
+    </form>
+
+    <!-- Back Button -->
+    <div class="text-center mt-3">
+        <a asp-action="GetAll" class="btn btn-outline-secondary">Back to Ingredient List</a>
+    </div>
+</div>
+
+<!-- jQuery Validation Scripts -->
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,65 @@
+﻿@model OnlineRestaurant.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+    Layout = "_CreateOrderLayout";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-black mb-4">Order Details</h2>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <strong>Order ID:</strong>
+                <p class="text-muted">@Model.Id</p>
+            </div>
+            <div class="col-md-4">
+                <strong>Order Date:</strong>
+                <p class="text-muted">@Model.Date.ToShortDateString()</p>
+            </div>
+            <div class="col-md-4">
+                <strong>Total Amount:</strong>
+                <p class="text-muted">@Model.TotalAmount $</p>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h4 class="text-center mb-3">Ordered Products</h4>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var (item, index) in Model.OrderItems.Select((value, i) => (value, i + 1)))
+                    {
+                            <tr>
+                                <td>@index</td>
+                                <td>@item.product.Name</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price $</td>
+                                <td>@(item.Quantity * item.Price) $</td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a asp-action="Index" asp-controller="Home" class="btn btn-outline-secondary">Back to Menu</a>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery Validation Scripts -->
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
